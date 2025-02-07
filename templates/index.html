@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rempah Rimpang</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class="container-fluid judul border pt-4 pb-2">
+      <h1 class="text-uppercase">Klasifikasi Rempah Rimpang</h1>
+      <p class="">
+        Penerapan Histogram Equalization untuk Perbaikan Citra pada
+        Klasifikasi menggunakan K-Nearest Neighbor
+      </p>
+  </div>
+
+  <div class="container-fluid container content">
+    <div class="row">
+      <!-- Baris Pertama Kol 1 -->
+      <div class="col-md-3 custom-column">
+        <center>
+          <div class="p-2 mx-2">
+            <form action="/predict" method="post" class="flex-fill bd-highlight col" >
+              <div class="col">
+                <div class="col upload form-group pb-1">
+                  <label for="img">Upload Image</label>
+                  <input type="file" class="form-control" name="images" id="img" />
+                </div>
+                <div class="image-details">
+                  <p id="details"></p>
+                </div>
+
+                <div class="row klasifikasi justify-content-between">
+                  <button type="submit" class="col btn">
+                    Klasifikasi
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <form action="/reset" method="post" class="flex-fill reset col">
+              <div class="row justify-content-between" style="width: 265px">
+                <button type="submit" class="col btn m-1">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+        </center>
+        <hr>
+      </div>
+
+      <!-- COL 2 -->
+      <div class="col-md-3 custom-column">
+        <div class="col image p-2">
+          <div id="selectedBanner" class="col mb-3">
+            <img src="{{ image }} " alt="" height="200px" width="200px" />
+            
+          </div>
+          <h6>Citra Input</h6>
+        </div>
+      </div>
+
+      <!-- COL 3 -->
+      <div class="col-md-3 custom-column">
+        <div class="col image p-2">
+          <div id="imagerb" class="col mb-3">
+            <img src="{{rb}}" alt="" height="200px" width="200px" />
+            <h6>Citra Remove Background</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 4 -->
+      <div class="col-md-3 custom-column">
+        <div class="col image p-2">
+          <div id="imageclahe" class="col mb-3">
+            <img src="{{clahe}}" alt="" height="200px" width="200px" />
+            <h6>Citra Histogram Equalization</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row baris-konten">
+      <!-- Baris Kedua COL 1 -->
+      <div class="col-md-3 custom-column ektraksi">
+        <div class="flex-fill bd-highlight col p-2">
+          <div class="flex-fill bd-highlight m-2 text-start" style="width: 250px; overflow-x: auto">
+            <table class="table table-bordered">
+              <strong>RGB</strong>
+              <tr>
+                <td>R : <b>{{ re }}</b></td>
+                <td>G : <b>{{ gr }}</b></td>
+                <td>B : <b>{{ bl }}</b></td>
+              </tr>
+          </table>
+            <table class="table table-bordered">
+                <strong>HSV</strong>
+                <tr>
+                  <td>H : <b>{{ h }}</b></td>
+                  <td>S : <b>{{ s }}</b></td>
+                  <td>V : <b>{{ v }}</b></td>
+                </tr>
+            </table>
+          </div>
+          <div class="flex-fill bd-highlight m-2 text-start">
+            <strong>GLCM</strong>
+            <div class="glcm">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Contrast_0</th>
+                    <th>Contrast_45</th>
+                    <th>Contrast_90</th>
+                    <th>Contrast_135</th>
+                    <th>Dissimilarity_0</th>
+                    <th>Dissimilarity_45</th>
+                    <th>Dissimilarity_90</th>
+                    <th>Dissimilarity_135</th>
+                    <th>Homogeneity_0</th>
+                    <th>Homogeneity_45</th>
+                    <th>Homogeneity_90</th>
+                    <th>Homogeneity_135</th>
+                    <th>Energy_0</th>
+                    <th>Energy_45</th>
+                    <th>Energy_90</th>
+                    <th>Energy_135</th>
+                    <th>Correlation_0</th>
+                    <th>Correlation_45</th>
+                    <th>Correlation_90</th>
+                    <th>Correlation_135</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ con0 }}</td>
+                    <td>{{ con45 }}</td>
+                    <td>{{ con90 }}</td>
+                    <td>{{ con135 }}</td>
+                    <td>{{ diss0 }}</td>
+                    <td>{{ diss45 }}</td>
+                    <td>{{ diss90 }}</td>
+                    <td>{{ diss135 }}</td>
+                    <td>{{ hom0 }}</td>
+                    <td>{{ hom45 }}</td>
+                    <td>{{ hom90 }}</td>
+                    <td>{{ hom135 }}</td>
+                    <td>{{ enr0 }}</td>
+                    <td>{{ enr45 }}</td>
+                    <td>{{ enr90 }}</td>
+                    <td>{{ enr135 }}</td>
+                    <td>{{ corr0 }}</td>
+                    <td>{{ corr45 }}</td>
+                    <td>{{ corr90 }}</td>
+                    <td>{{ corr135 }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- COL 2 -->
+      <div class="col-md-3 custom-column">
+        <div class="col image p-2">
+          <div id="imagegray" class="col mb-3">
+            <img src="{{gray}}" alt="" height="200px" width="200px" />
+            <h6>Citra Grayscale</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 3 -->
+      <div class="col-md-3 custom-column">
+        <div class="col image p-2">
+          <div id="imagehsv" class="col mb-3">
+            <img src="{{hsv}}" alt="" height="200px" width="200px" />
+            <h6>Citra HSV</h6>
+          </div>
+        </div>
+      </div>
+      
+      <!-- COL 4 -->
+      <div class="col-md-3 custom-column">
+        <div class="text-start hasil p-4">
+          <label>Hasil Klasifikasi :</label>
+          <strong class="text-start">{{hasil}}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <script>
+    var selDiv = "";
+    var storedFiles = [];
+
+    $(document).ready(function () {
+        $("#img").on("change", handleFileSelect);
+        selDiv = $("#selectedBanner");
+    });
+
+    function handleFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+                return;
+            }
+            storedFiles.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var html =
+                    '<img src="' +
+                    e.target.result +
+                    "\" data-file='" +
+                    f.name +
+                    "alt='Category Image' height='200px' width='200px'>";
+                selDiv.html(html);
+
+                // Detail informasi gambar
+                var detailsDiv = $("#details");
+                var fileSizeKB = (f.size / 1024).toFixed(2); // Konversi bytes ke kilobytes
+                var detailsHtml =
+                    '<p>Nama File: <b>' + f.name  + '</b>' +
+                    '<br>Ukuran : <b>' + fileSizeKB + ' KB </b>' +
+                    '<br>Resolusi : <b><span id="resolution"></span></b></p>';
+                detailsDiv.html(detailsHtml);
+
+                // Baca gambar untuk mendapatkan resolusi
+                var img = new Image();
+                img.onload = function () {
+                    var resolutionSpan = document.getElementById('resolution');
+                    resolutionSpan.textContent = img.width + ' x ' + img.height + ' px';
+                };
+                img.src = URL.createObjectURL(f);
+            };
+            reader.readAsDataURL(f);
+        });
+    }
+</script>
+</body>
+
+</html>

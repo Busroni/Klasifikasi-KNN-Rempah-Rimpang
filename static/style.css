@@ -1,0 +1,87 @@
+/* Import Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* Apply Poppins font to the entire body */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.baris-konten {
+    height: 350px;
+    margin-bottom:50px;
+}
+
+.content{
+    margin-top:30px;
+}
+
+.judul{
+    color: #765827;
+    text-align: center;
+}
+
+.judul h1{
+    font-weight: 600;
+}
+
+.upload{
+    margin-left: -20px;
+    width: 250px;
+    background-color: #D6CC99;
+    padding:5px;
+    border-radius: 5px 5px 0 0;
+}
+
+.image-details{
+    margin-left: -20px;
+    width: 250px;
+    font-size:11px;
+    border: 2px solid #D6CC99;
+    border-radius: 0 0 5px 5px;
+    padding:5px;
+    overflow-x: auto;
+}
+
+.klasifikasi{
+    margin-left: -32px;
+    margin-top: 10px;
+    width: 250px;
+    background-color: #A9B388;
+    border-radius: 5px;
+}
+
+.reset{
+    margin-left: -20px;
+    margin-top: 10px;
+    background-color: #ff6868;
+    width: 250px;
+    border-radius: 5px;
+}
+
+.image{
+    width: 200px; 
+    height: 200px;
+    text-align: center;
+}
+
+.ektraksi{
+    font-size:12px;
+}
+
+.glcm{
+    width: 250px; 
+    overflow-x: auto;
+}
+
+.hasil{
+    margin-left:10px;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #FEFAE0;
+    height: 180px;
+    width: 200px;
+    font-size: 18px;
+    text-align: center;
+}
+
